@@ -57,7 +57,7 @@
     </li>
     <li class="menu-item">
         <a href="/" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-dock-top"></i>
+          <i class="menu-icon tf-icons bx bxs-user-badge"></i>
           <div data-i18n="Data Master">Kepegawaian</div>
         </a>
         <ul class="menu-sub">
