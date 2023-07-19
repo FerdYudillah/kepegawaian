@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gaji;
+use App\Models\NaikBerkala;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,14 +17,22 @@ class NaikBerkalaController extends Controller
         //
     }
 
+    public function indexPegawai()
+    {
+        $naikBerkala=NaikBerkala::where('naik_berkalas.id','=',auth()->user()->id)->get();
+        // $naikBerkala=NaikBerkala::find(auth()->user()->id);
+        return view('pegawai.pns.kenaikan.naik_gaji_berkala.riwayat',compact('naikBerkala'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('kepegawaian.naik_berkala.tambah', [
-            'user' => User::where('user.id','=',auth()->user()->id)->join('kepegawaians','kepegawaians.pegawai_id','=','pegawai.id')
+        return view('pegawai.pns.kenaikan.naik_gaji_berkala.create', [
+            'user' => User::where('users.id','=',auth()->user()->id)->join('kepegawaians','kepegawaians.user_id','=','users.id')
             ->first(),
+            'gaji' => Gaji::all(),
         ]);
     }
 
