@@ -53,6 +53,11 @@
             <div data-i18n="Data Pangkat">Data Pangkat</div>
           </a>
         </li>
+        <li class="menu-item">
+          <a href="{{ route('gaji.index') }}" class="menu-link">
+            <div data-i18n="Data Pangkat">Data Gaji</div>
+          </a>
+        </li>
       </ul>
     </li>
     <li class="menu-item">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnakController;
+use App\Http\Controllers\GajiController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::put('/change/{id}', [App\Http\Controllers\PegawaiController::class, 'upda
 //Admin
 Route::group(['prefix' => 'Admin', 'middleware' => ['auth']], function(){
     Route::resource('pegawai', PegawaiController::class);
+    Route::resource('gaji', GajiController::class);
 });
 
 //PNS
