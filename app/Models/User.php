@@ -5,7 +5,9 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -48,6 +50,16 @@ class User extends Authenticatable
         public function anak_pns(): HasMany
         {
             return $this->hasMany(Anak::class);
+        }
+
+        public function gaji_pns(): HasOne
+        {
+            return $this->hasOne(Gaji::class);
+        }
+
+        public function naik_berkala(): HasMany
+        {
+            return $this->hasMany(NaikBerkala::class);
         }
 
 
