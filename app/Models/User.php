@@ -62,6 +62,11 @@ class User extends Authenticatable
             return $this->hasMany(NaikBerkala::class);
         }
 
+        public function fileBerkas()
+    {
+        return $this->hasMany(FileNaikBerkala::class);
+    }
+
 
     // protected $guarded = ['id'];
 
