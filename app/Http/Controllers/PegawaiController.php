@@ -296,10 +296,13 @@ class PegawaiController extends Controller
         $dbpg['tgl_sk_cpns']=$data['tgl_sk_cpns'];
         $dbpg['nomor_sk_pns']=$data['nomor_sk_pns'];
         $dbpg['tgl_sk_pns']=$data['tgl_sk_pns'];
+        $dbpg['satuan_kerja']=$data['satuan_kerja'];
         $user->kepegawaian_pns()->update($dbpg);
 
-        $dbsi['nama_si']=$data['tgl_sk_pns'];
-        $user->kepegawaian_pns()->update($dbsi);
+        // $dbsi['nama_si']=$data['nama_pasangan'];
+        // $dbsi['t_lahir']=$data['tpt_lahir_pasangan'];
+        // $dbsi['tgl_lahir']=$data['tgl_lahir_pasangan'];
+        // $user->suami_istri()->update($dbsi);
         // dd($dbsi);
         return redirect()->back();
     }
