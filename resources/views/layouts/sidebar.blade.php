@@ -49,7 +49,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="pages-account-settings-connections.html" class="menu-link">
+          <a href="{{ route('pangkat.index') }}" class="menu-link">
             <div data-i18n="Data Pangkat">Data Pangkat</div>
           </a>
         </li>
@@ -82,7 +82,7 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="pages-account-settings-connections.html" class="menu-link">
+            <a href="{{ route('index.berkala') }}" class="menu-link">
               <div data-i18n="Data Pangkat">Usul Kenaikan Gaji Berkala</div>
             </a>
           </li>
