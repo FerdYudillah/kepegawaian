@@ -77,7 +77,7 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="" class="menu-link">
+            <a href="{{ route('menu.naik.pangkat') }}" class="menu-link">
               <div data-i18n="Data Pangkat">Usul Kenaikan Pangkat</div>
             </a>
           </li>
