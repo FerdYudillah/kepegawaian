@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('naik_berkalas', function (Blueprint $table) {
+        Schema::create('naik_pangkats', function (Blueprint $table) {
             $table->id();
-            //relasi dengan Tabel Users
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            //relasi dengan Tabel Users
-            $table->unsignedBigInteger('gaji_id');
-            $table->foreign('gaji_id')->references('id')->on('gajis')->onDelete('cascade');
-            // $table->string('gaji_lama', 100)->nullable();
+            $table->unsignedBigInteger('pangkat_id');
+            $table->foreign('pangkat_id')->references('id_pangkat')->on('pangkats')->onDelete('cascade');
             $table->date('mulai_tanggal')->nullable();
             $table->date('naik_selanjutnya')->nullable();
             $table->date('tgl_usulan')->nullable();
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('naik_berkalas');
+        Schema::dropIfExists('naik_pangkats');
     }
 };
