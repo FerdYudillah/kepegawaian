@@ -25,7 +25,7 @@
                             <div class="card-body">
                               <h5 class="card-title">Kenaikan Pangkat </h5>
                               <p class="card-text"><strong>Jabatan Pelaksana/Staf.</strong></p>
-                              <a href="#" class="btn btn-Success">Masuk</a>
+                              <a href="{{ route('menu.pangkat.pestaf') }}" class="btn btn-Success">Masuk</a>
                             </div>
                           </div>
                         </div>
@@ -34,7 +34,7 @@
                             <div class="card-body">
                               <h5 class="card-title">Kenaikan Pangkat</h5>
                               <p class="card-text"><strong>Jabatan Pelaksana/Staf Penyesuaian Ijazah.</strong></p>
-                              <a href="#" class="btn btn-warning">Masuk</a>
+                              <a href="{{ route('menu.pangkat.pestafijazah') }}" class="btn btn-warning">Masuk</a>
                             </div>
                           </div>
                         </div>
@@ -43,7 +43,7 @@
                             <div class="card-body">
                               <h5 class="card-title">Kenaikan Pangkat</h5>
                               <p class="card-text"><strong>Jabatan Fungsional Tertentu.</strong></p>
-                              <a href="#" class="btn btn-info">Masuk</a>
+                              <a href="{{ route('menu.pangkat.ft') }}" class="btn btn-info">Masuk</a>
                             </div>
                           </div>
                         </div>
