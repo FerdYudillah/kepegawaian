@@ -52,12 +52,12 @@ class User extends Authenticatable
             return $this->hasMany(Anak::class);
         }
 
-        public function gaji_pns(): HasOne
+        public function gaji_pns()
         {
             return $this->hasOne(Gaji::class);
         }
 
-        public function naik_berkala(): HasMany
+        public function naikBerkala()
         {
             return $this->hasMany(NaikBerkala::class);
         }
