@@ -77,7 +77,7 @@
             @enderror
         </div>
     </div>
-    <button type="submit" class="btn btn-success  ">Update Data Suami/Istri</button>
+   
 </form>
     <div class="row">
         <hr class="dropdown-divider">
