@@ -48,7 +48,7 @@ class GajiController extends Controller
      */
     public function show()
     {
-        
+
     }
 
     /**
@@ -69,7 +69,7 @@ class GajiController extends Controller
             'masa_kerja' => 'required',
             'gaji_pokok' => 'required',
             'tahun' => 'required',
-            
+
         ]);
 
         // dd($request);
@@ -81,7 +81,7 @@ class GajiController extends Controller
             'tahun' => $request->tahun
         ]);
 
-  
+
 
         Alert::success('Info', 'Update Data Pegawai Berhasil');
         return redirect()->route('gaji.index');
@@ -93,7 +93,6 @@ class GajiController extends Controller
     public function destroy(Gaji $gaji)
     {
         $gaji->destroy($gaji->id);
-        // dd($gaji);
         Alert::success('Hapus', 'Data Telah Berhasil Dihapus');
         return redirect()->route('gaji.index');
     }
