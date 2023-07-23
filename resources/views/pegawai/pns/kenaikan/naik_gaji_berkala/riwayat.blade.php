@@ -33,10 +33,10 @@
                             @forelse ($naikBerkala as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $item->User->nip }}</td>
-                                <td>{{ $item->User->name }}</td>
-                                <td>{{ $item->gaji_lama }}</td>
-                                <td>{{ $item->gaji_pns->gaji_pokok }}</td>
+                                <td>{{ $item->user_pegawai->nip }}</td>
+                                <td>{{ $item->user_pegawai->name }}</td>
+                                <td>{{ $item->user_pegawai->kepegawaian_pns->gaji }}</td>
+                                <td>{{ $item->gaji->gaji_pokok }}</td>
                                 <td>{{ $item->tgl_usulan }}</td>
                                 <td>{{ $item->ket }}</td>
                                 <td>
