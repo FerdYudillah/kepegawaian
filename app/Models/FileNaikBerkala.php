@@ -10,8 +10,8 @@ class FileNaikBerkala extends Model
     use HasFactory;
     protected $table="file_naik_berkalas";
     protected $fillable=[
-        'nama_berkas',
-        'file_path_berkas'
+        'file_berkas',
+        'file_berkas_path'
     ];
 
     public function file() {
