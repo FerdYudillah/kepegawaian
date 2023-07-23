@@ -13,16 +13,25 @@ class NaikBerkala extends Model
 
     protected $table = 'naik_berkalas';
     protected $fillable = [
-
+        'user_id',
+        'gaji_id',
+        'mulai_tanggal',
+        'naik_selanjutnya',
+        'tgl_usulan',
         ];
 
-    public function User() : HasMany
+    public function user_pegawai()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function gaji_pns() : HasOne
+    public function gaji()
     {
-        return $this->hasOne(Gaji::class);
+        return $this->belongsTo(Gaji::class, 'gaji_id');
+    }
+
+    public function kepegawaian()
+    {
+        return $this->belongsTo(Kepegawaian::class, 'gaji_id');
     }
 }

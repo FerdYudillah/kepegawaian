@@ -21,9 +21,9 @@ class Gaji extends Model
             return $this->belongsTo(User::class);
         }
 
-        public function Naik_berkala() : BelongsTo
+        public function naikBerkala()
         {
-            return $this->belongsTo(NaikBerkala::class);
+            return $this->hasMany(NaikBerkala::class);
         }
 
 
