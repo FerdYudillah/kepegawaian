@@ -18,7 +18,6 @@ class Pendidikan extends Model
             'jurusan',
             'kota',
             'tahun_lulus',
-
         ];
 
         public function users()

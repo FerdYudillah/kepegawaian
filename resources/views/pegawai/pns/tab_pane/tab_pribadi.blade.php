@@ -1,7 +1,34 @@
 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-    <form action="{{ route('update.pegawai', $user->id) }}" method="POST">
+    <form action="{{ route('update.foto', $user->id) }}" method="POST" enctype="multipart/form-data">
+        {{-- @method('put') --}}
         @csrf
-        @method('PUT')
+        <div class="card-body">
+            <div class="d-flex align-items-start align-items-sm-center gap-4">
+              <img src="../assets/img/avatars/1.png" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+              <div class="button-wrapper">
+                <label for="foto">Foto</label>
+                <input type="hidden" name="oldFoto" value="{{ $user->foto }}">
+                @if ($user->foto)
+                <img src="{{ asset('storage/' . $user->foto) }}" class="img-preview img-fluid mb-3 col-sm-2 d-block">
+                @else
+                <img class="img-preview img-fluid mb-3 col-sm-2">
+                @endif
+                <input type="file" class="form-control col-4 @error('foto') is-invalid @enderror" id="foto" name="foto"  onchange="previewImage()" accept="image/*" >
+                @error('foto')
+                    <div class="invalid-feedback">
+                     {{ $message }}
+                     </div>
+                 @enderror
+                 <button type="submit" class="btn btn-info btn-sm mt-2">Simpan</button>
+                </div>
+            </div>
+          </div>
+        </form>
+          <hr class="my-0" />
+          <form action="{{ route('update.pegawai', $user->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+          <div class="card-body">
         <div class="row">
             <div class="mb-3 col-md-6">
                 <label for="nip" class="form-label">NIP</label>
@@ -51,7 +78,7 @@
             <div class="mb-3 col-md-6">
                 <label for="pendidikan" class="form-label">Pendidikan Terakhir</label>
                 <input class="form-control" type="text"id="pendidikan" name="pendidikan" value="{{ $user->pendidikan }}"/>
-                <a href="">[Riwayat pendidikan]</a>
+                <a href="{{ route('riwayat.pend') }}">[Riwayat pendidikan]</a>
             </div>
             <div class="mb-3 col-md-6">
                 <label for="jumlah_anak" class="form-label">Jumlah Anak</label>
@@ -103,6 +130,7 @@
                 </div>
               </div>
         </div>
+    </div>
         <button type="submit" class="btn btn-success ">Update Data Pribadi</button>
         {{-- <a href="{{ route('pegawai.edit',$user->id) }}" class="btn btn-warning">Edit Data Pegawai</a> --}}
     </form>

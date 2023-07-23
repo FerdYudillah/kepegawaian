@@ -7,6 +7,7 @@ use Alert;
 use App\Models\Anak;
 use App\Models\User;
 use App\Models\Pangkat;
+use App\Models\Pendidikan;
 use App\Models\SuamiIstri;
 use App\Models\Kepegawaian;
 use App\Models\NaikPangkat;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
@@ -49,6 +51,14 @@ class PegawaiController extends Controller
     {
         $user = User::find($id);
         return view('pegawai.admin.profile-pegawai.view',compact('user'));
+    }
+
+    public function showRiwayatPend($id)
+    {
+        // $user = auth()->id();
+        $pendidikan = Pendidikan::where('user_id', $id)->get();
+        return view('pegawai\admin\pendidikan\riwayat_pend',compact('pendidikan'));
+
     }
 
     public function showPegawai(User $user)
@@ -98,6 +108,7 @@ class PegawaiController extends Controller
             'npwp' => 'required',
             'no_bpjs' => 'required',
             'no_karsu' => 'required',
+            'foto' => 'image|file|max:1024',
         ]);
 
         // dd($request);
@@ -124,9 +135,24 @@ class PegawaiController extends Controller
             'password' => is_null($request->password) ? $user->password : Hash::make($request->password),
         ]);
 
+
         Alert::success('Sukses', 'Update Data Pegawai Berhasil');
         return redirect()->route('show.pegawai');
+    }
 
+    public function uploadFoto(Request $request, User $user)
+    {
+        $validatedData = $request->validate ([
+            'foto' => 'mimes:jpeg,jpg,png|image|file|max:3024',
+        ]);
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('images');
+        }
+
+        // dd($validatedData);
+        User::create($validatedData);
+        Alert::success('Sukses', 'Foto Profile Berhasil Diubah');
+        return redirect()->route('show.pegawai');
     }
 
     //Function Update Data Kepegawaian PNS
@@ -228,10 +254,8 @@ class PegawaiController extends Controller
 
     public function editAnak($id)
     {
-        // Anak::findOrFail($id);
-        // dd(Anak);
+
         $user = auth()->id();
-        // $anak = Anak::where('user_id', $user)->get();
         $anak = Anak::where('id', $id)->where('user_id', $user)->first();
         return view('pegawai.pns.anak.edit_anak', compact('anak'));
     }
@@ -261,9 +285,7 @@ class PegawaiController extends Controller
             return redirect()->route('show.pegawai');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //
@@ -290,7 +312,7 @@ class PegawaiController extends Controller
         $db['status_kawin']=$data['status_perkawinan'];
         $db['email']=$data['email'];
         $user->update($db);
-        // dd($db);
+
         $dbpg['status_pegawai']=$data['status_kepegawaian'];
         $dbpg['jabatan']=$data['jabatan'];
         $dbpg['jenis_jabatan']=$data['jenis_jabatan'];
@@ -303,93 +325,89 @@ class PegawaiController extends Controller
         $dbpg['satuan_kerja']=$data['satuan_kerja'];
         $user->kepegawaian_pns()->update($dbpg);
 
-        // $dbsi['nama_si']=$data['nama_pasangan'];
-        // $dbsi['t_lahir']=$data['tpt_lahir_pasangan'];
-        // $dbsi['tgl_lahir']=$data['tgl_lahir_pasangan'];
-        // $user->suami_istri()->update($dbsi);
-        // dd($dbsi);
         return redirect()->back();
     }
 
 
-    public function naikPangkatMenu()
+    //Riwayat Pendidikan
+    public function menuPendidikan()
     {
-        return view('pegawai.pns.kenaikan.naik_pangkat.menu');
+        $user = User::find(auth()->user()->id);
+        return view('pegawai\pns\pendidikan\riwayat_pend', compact('user'));
     }
 
-    public function pangkatStrutural()
+    public function createPendidikan()
+    {
+        return view('pegawai.pns.pendidikan.tambah_pend');
+    }
+
+    public function storePendidikan(Request $request)
+    {
+            $validateData = $request->validate([
+                'no_ijazah' => 'required',
+                'tgl_ijazah' => 'required',
+                'tingkat_pendidikan' => 'required',
+                'lembaga_pendidikan' => 'required',
+                'jurusan' => 'required',
+                'kota' => 'required',
+                'tahun_lulus' => 'required',
+            ]);
+
+            $validateData['user_id'] = auth()->user()->id;
+            Pendidikan::create($validateData);
+            Alert::success('Sukses', 'Data Riwayat Pendidikan Berhasil Disimpan');
+            return redirect()->route('riwayat.pend');
+    }
+
+    public function editPendidikan($id)
     {
         $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.eselon_struktural.riwayat',compact('user'));
+        $pendidikan = Pendidikan::where('id_pendidikan', $id)->where('user_id', $user)->first();
+        return view('pegawai\pns\pendidikan\edit_pend', compact('pendidikan'));
     }
 
-    public function tambahStruktural()
+    public function updatePendidikan(Request $request, $id)
     {
-        $pangkat = Pangkat::get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.eselon_struktural.create', [
-            'user' => User::where('users.id','=',auth()->user()->id)->join('kepegawaians','kepegawaians.user_id','=','users.id')
-            ->first(),
-            'pangkat' => $pangkat,
+        $request->validate([
+            'no_ijazah' => 'required',
+            'tgl_ijazah' => 'required',
+            'tingkat_pendidikan' => 'required',
+            'lembaga_pendidikan' => 'required',
+            'jurusan' => 'required',
+            'kota' => 'required',
+            'tahun_lulus' => 'required',
         ]);
+
+            $data = [
+                'no_ijazah' => $request->input('no_ijazah'),
+                'tgl_ijazah' => $request->input('tgl_ijazah'),
+                'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),
+                'lembaga_pendidikan' => $request->input('lembaga_pendidikan'),
+                'jurusan' => $request->input('jurusan'),
+                'kota' => $request->input('kota'),
+                'tahun_lulus' => $request->input('tahun_lulus'),
+            ];
+
+            Pendidikan::where('id_pendidikan',$id)->update($data);
+
+            Alert::success('Sukses', 'Data Riwayat Pendidikan Berhasil Diubah');
+            return redirect()->route('riwayat.pend');
     }
 
-    public function pangkatPelaksanaStaf()
-    {
-        $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf.riwayat',compact('user'));
+    public function hapusPendidikan($id)
+     {
+        Pendidikan::where('id_pendidikan',$id)->delete();
+        Alert::success('Hapus', 'Data Riwayat Pendidikan Telah Dihapus');
+        return redirect()->route('riwayat.pend');
     }
 
-    public function tambahPelaksanaStaf()
-    {
-        $pangkat = Pangkat::get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf.create', [
-            'user' => User::where('users.id','=',auth()->user()->id)->join('kepegawaians','kepegawaians.user_id','=','users.id')
-            ->first(),
-            'pangkat' => $pangkat,
-        ]);
-    }
 
-    //Naik Pangkat PNS Jabatan Pelaksana/Staf Penyesuaian Ijazah :
-    public function pangkatPeStafijazah()
-    {
-        $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf_ijazah.riwayat',compact('user'));
-    }
 
-    public function tambahPSI()
-    {
-        $pangkat = Pangkat::get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf_ijazah.create', [
-            'user' => User::where('users.id','=',auth()->user()->id)->join('kepegawaians','kepegawaians.user_id','=','users.id')
-            ->first(),
-            'pangkat' => $pangkat,
-        ]);
-    }
-
-    //Naik Pangkat PNS Jabatan Fungsional Tertentu :
-    public function naikPangkatFt()
-    {
-        $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.fungsional_tertentu.riwayat',compact('user'));
-    }
-
-    public function tambahFt()
-    {
-        $pangkat = Pangkat::get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.fungsional_tertentu.create', [
-            'user' => User::where('users.id','=',auth()->user()->id)->join('kepegawaians','kepegawaians.user_id','=','users.id')
-            ->first(),
-            'pangkat' => $pangkat,
-        ]);
-    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function changePassword(User $user)
     {
-        // $user = User::findOrFail($user->id);
+
         $user = User::findOrFail(auth()->user()->id);
         return view('user.edit_pass', compact('user'));
     }
@@ -398,14 +416,11 @@ class PegawaiController extends Controller
     {
         $request->validate([
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-
         ]);
 
         $user->update([
             'password' => is_null($request->password) ? $user->password : Hash::make($request->password),
         ]);
-
-
 
         Alert::success('Sukses', 'Email Atau Password Berhasil Diupdate');
         return redirect()->route('home');

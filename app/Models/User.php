@@ -32,6 +32,7 @@ class User extends Authenticatable
             'no_karsu',
             'email',
             'password',
+            'foto',
         ];
 
 
@@ -50,6 +51,11 @@ class User extends Authenticatable
         public function anak_pns(): HasMany
         {
             return $this->hasMany(Anak::class);
+        }
+
+        public function riwayat_pendidikan(): HasMany
+        {
+            return $this->hasMany(Pendidikan::class);
         }
 
         public function gaji_pns()

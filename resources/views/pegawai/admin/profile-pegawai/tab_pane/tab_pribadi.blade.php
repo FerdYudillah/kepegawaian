@@ -51,7 +51,7 @@
             <div class="mb-3 col-md-6">
                 <label for="pendidikan" class="form-label">Pendidikan Terakhir</label>
                 <input class="form-control" type="text"id="pendidikan" name="pendidikan" value="{{ $user->pendidikan }}"/>
-                <a href="">[Riwayat pendidikan]</a>
+                <a href="{{ route('show.pendidikan', $user->id) }}">[Riwayat pendidikan]</a>
             </div>
             <div class="mb-3 col-md-6">
                 <label for="jumlah_anak" class="form-label">Jumlah Anak</label>
