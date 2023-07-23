@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('no_bpjs')->nullable();
             $table->string('no_karsu')->nullable();
             $table->string('email')->unique()->nullable()->unique();
+            $table->string('foto')->unique()->nullable();
             $table->enum('level', ['ADMIN', 'PEGAWAI'])->nullable()->default('PEGAWAI');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
