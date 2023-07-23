@@ -25,4 +25,9 @@ class Kepegawaian extends Model
         {
             return $this->belongsTo(User::class, 'user_id');
         }
+
+        public function naikBerkala()
+        {
+            return $this->hasOne(naikBerkala::class);
+        }
 }
