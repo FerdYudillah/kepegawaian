@@ -87,10 +87,15 @@
                              @enderror
                             </div>
                         </div>
+                        <hr>
                         <p><h5><strong>Surat Pengantar :</strong></h5></p>
+                        <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                        <div class="row mb-4">
+                            @include('pegawai.pns.kenaikan.naik_pangkat.eselon_struktural.kelengkapan')
+                        </div>
                         <div class="row">
                             <div class="mb-3 col-md-6">
-                                <label for="sk_pangkat_terakhir"> SK Kenaikan Pangkat Terakhir</label>
+                                <label for="sk_pangkat_terakhir"> <strong>Upload FIlE BERKAS (ZIP / RAR)</strong></label>
                                     <input type="file" class="form-control col-4 @error('sk_pangkat_terakhir') is-invalid @enderror" id="sk_pangkat_terakhir" name="sk_pangkat_terakhir" >
                                     @error('sk_pangkat_terakhir')
                                 <div class="invalid-feedback">
@@ -98,90 +103,14 @@
                                 </div>
                              @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_lantik_akhir">SK Pelantikan terakhir</label>
-                                    <input type="file" class="form-control col-4 @error('sk_lantik_akhir') is-invalid @enderror" id="sk_lantik_akhir" name="sk_lantik_akhir" >
-                                    @error('sk_lantik_akhir')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_lantik_akhir">BA Pelantikan</label>
-                                    <input type="file" class="form-control col-4 @error('sk_lantik_akhir') is-invalid @enderror" id="sk_lantik_akhir" name="sk_lantik_akhir" >
-                                    @error('sk_lantik_akhir')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="surat_asn">Surat Rekomendasi ASN</label>
-                                    <input type="file" class="form-control col-4 @error('surat_asn') is-invalid @enderror" id="surat_asn" name="surat_asn" >
-                                    @error('surat_asn')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="skp_2021">SKP 2021</label>
-                                    <input type="file" class="form-control col-4 @error('skp_2021') is-invalid @enderror" id="skp_2021" name="skp_2021" >
-                                    @error('skp_2021')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="skp_2022">SKP 2022</label>
-                                    <input type="file" class="form-control col-4 @error('skp_2022') is-invalid @enderror" id="skp_2022" name="skp_2022" >
-                                    @error('skp_2022')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_cpns">SK CPNS</label>
-                                    <input type="file" class="form-control col-4 @error('sk_cpns') is-invalid @enderror" id="sk_cpns" name="sk_cpns" >
-                                    @error('sk_cpns')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_pns">SK PNS</label>
-                                    <input type="file" class="form-control col-4 @error('sk_pns') is-invalid @enderror" id="sk_pns" name="sk_pns" >
-                                    @error('sk_pns')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="serti_diklat_akhir">Sertifikat Diklat Kepimpinan Terakhir</label>
-                                    <input type="file" class="form-control col-4 @error('serti_diklat_akhir') is-invalid @enderror" id="serti_diklat_akhir" name="serti_diklat_akhir" >
-                                    @error('serti_diklat_akhir')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="serti_lulus_dinas">Sertifikat Tanda Lulus Ujian Dinas</label>
-                                    <input type="file" class="form-control col-4 @error('serti_lulus_dinas') is-invalid @enderror" id="serti_lulus_dinas" name="serti_lulus_dinas" >
-                                    @error('serti_lulus_dinas')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
+                            <hr>
                             <p><h5><strong>Pencatuman Gelar Pendidikan bagi yang memiliki ijazah baru dan belum tercantum di SK Kenaikan pangkat Terakhir :</strong></h5></p>
+                            <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                            <div class="row mb-4">
+                                @include('pegawai.pns.kenaikan.naik_pangkat.eselon_struktural.kelengkapan_pend')
+                            </div>
                             <div class="mb-3 col-md-6">
-                                <label for="surat_belajar">Surat Belajar</label>
+                                <label for="surat_belajar"><strong>UPLOAD FILE ZIP / RAR</strong></label>
                                     <input type="file" class="form-control col-4 @error('surat_belajar') is-invalid @enderror" id="surat_belajar" name="surat_belajar" >
                                     @error('surat_belajar')
                                 <div class="invalid-feedback">
@@ -189,62 +118,8 @@
                                 </div>
                              @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_tugas_belajar">SK Tugas Belajar</label>
-                                    <input type="file" class="form-control col-4 @error('sk_tugas_belajar') is-invalid @enderror" id="sk_tugas_belajar" name="sk_tugas_belajar" >
-                                    @error('sk_tugas_belajar')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="ijazah_transkrip">Ijazah & Transkrip Nilai Terakhir</label>
-                                    <input type="file" class="form-control col-4 @error('ijazah_transkrip') is-invalid @enderror" id="ijazah_transkrip" name="ijazah_transkrip" >
-                                    @error('ijazah_transkrip')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="surat_gelar">Surat Pencantuman Gelar</label>
-                                    <input type="file" class="form-control col-4 @error('surat_gelar') is-invalid @enderror" id="surat_gelar" name="surat_gelar" >
-                                    @error('surat_gelar')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <hr class="dropdown-divider">
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_henti_jafung">SK Pemberhentian Jafung</label>
-                                    <input type="file" class="form-control col-4 @error('sk_henti_jafung') is-invalid @enderror" id="sk_henti_jafung" name="sk_henti_jafung" >
-                                    @error('sk_henti_jafung')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_pmk">SK PMK</label>
-                                    <input type="file" class="form-control col-4 @error('sk_pmk') is-invalid @enderror" id="sk_pmk" name="sk_pmk" >
-                                    @error('sk_pmk')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_mutasi">SK Mutasi</label>
-                                    <input type="file" class="form-control col-4 @error('sk_mutasi') is-invalid @enderror" id="sk_mutasi" name="sk_mutasi" >
-                                    @error('sk_mutasi')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
                         </div>
+                        <hr>
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="tgl_usulan" class="form-label">Tanggal Diusulkan</label>
