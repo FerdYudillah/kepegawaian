@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <h3 class="card-title"><strong>Usul Kenaikan Gaji Berkala</strong></h3>
                     </div>
-                    <form action="" method="POST">
+                    <form action="{{ route('simpan.berkala') }}" method="POST">
                         @csrf
                          <div class="row">
                             <div class="mb-3 col-md-6">
@@ -50,16 +50,21 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="gaji_id" class="form-label">Gaji Baru</label>
-                                <select name="gaji_id" class="form-control @error('gaji_id') is-invalid @enderror">
-                                    <option  value="">---Pilih Gaji Baru---</option>
-                                        @foreach ($gaji as $item)
-                                            @if (old('gaji_id') == $item->gaji_id)
-                                                <option value="{{ $item->gaji_id }}" selected>{{ $item->gaji_pokok }}</option>
-                                            @else
-                                                <option value="{{ $item->gaji_id }}">{{ $item->gaji_pokok }}</option>
-                                            @endif
-                                        @endforeach
+                                <select name="gaji_id" class="form-select @error('gaji_id') is-invalid @enderror">
+                                    <option value="" selected disabled>---Pilih Gaji Baru---</option>
+                                          @foreach ($gaji as $gajis)
+                                              @if (old('gaji_id') == $gajis->gaji_id)
+                                              <option value="{{ $gajis->id }}">{{ $gajis->gaji_pokok }}</option>
+                                              @else
+                                              <option value="{{ $gajis->id }}">{{ $gajis->gaji_pokok }}</option>
+                                              @endif
+                                          @endforeach
                                 </select>
+                                @error('gaji_id')
+                                    <div class="invalid-feedback">
+                                    {{ $message }}
+                                    </div>
+                                 @enderror
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="masa_kerja" class="form-label">Masa Kerja</label>
@@ -67,35 +72,60 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="mulai_tanggal" class="form-label">Mulai Tanggal</label>
-                                <input class="form-control" type="date" id="mulai_tanggal" name="mulai_tanggal" value="" />
+                                <input class="form-control @error('mulai_tanggal') is-invalid @enderror" type="date" id="mulai_tanggal" name="mulai_tanggal" value="{{ old('mulai_tanggal') }}" />
+                                @error('mulai_tanggal')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                                </div>
+                             @enderror
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="naik_selanjutnya" class="form-label">Tanggal Kenaikan Selanjutnya</label>
-                                <input class="form-control" type="date" id="naik_selanjutnya" name="naik_selanjutnya" value="" />
+                                <input class="form-control @error('naik_selanjutnya') is-invalid @enderror" type="date" id="naik_selanjutnya" name="naik_selanjutnya" value="{{ old('naik_selanjutnya') }}" />
+                                @error('naik_selanjutnya')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                                </div>
+                             @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col-md-6">
-                                <label for="foto">Fotocopy SK Berkala Terakhir</label>
-                                    <input type="file" class="form-control col-4 " id="foto" name="foto" required>
+                                <label for="sk_berkala_terakhir">Fotocopy SK Berkala Terakhir</label>
+                                    <input type="file" class="form-control col-4 @error('sk_berkala_terakhir') is-invalid @enderror" id="sk_berkala_terakhir" name="sk_berkala_terakhir" >
+                                    @error('sk_berkala_terakhir')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                                </div>
+                             @enderror
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label for="foto">SK CPNS</label>
-                                    <input type="file" class="form-control col-4 " id="foto" name="foto" required>
+                                <label for="sk_cpns">SK CPNS</label>
+                                    <input type="file" class="form-control col-4 @error('sk_cpns') is-invalid @enderror" id="sk_cpns" name="sk_cpns" >
+                                    @error('sk_cpns')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                                </div>
+                             @enderror
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label for="foto">SK Kenaikan Pangkat Terakhir</label>
-                                    <input type="file" class="form-control col-4 " id="foto" name="foto" required>
+                                <label for="sk_naik_pangkat_akhir">SK Kenaikan Pangkat Terakhir</label>
+                                    <input type="file" class="form-control col-4 " id="sk_naik_pangkat_akhir" name="sk_naik_pangkat_akhir" required>
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label for="foto">SK Pemangku Jabatan</label>
-                                    <input type="file" class="form-control col-4 " id="foto" name="foto" required>
+                                <label for="sk_mangku_jabat">SK Pemangku Jabatan</label>
+                                    <input type="file" class="form-control col-4 " id="sk_mangku_jabat" name="sk_mangku_jabat" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="tgl_usulan" class="form-label">Tanggal Diusulkan</label>
-                                <input class="form-control" type="date" id="tgl_usulan" name="tgl_usulan" value="" required/>
+                                <input class="form-control @error('tgl_usulan') is-invalid @enderror" type="date" id="tgl_usulan" name="tgl_usulan" value="{{ old('tgl_usulan') }}" />
+                                @error('tgl_usulan')
+                                <div class="invalid-feedback">
+                                {{ $message }}
+                                </div>
+                             @enderror
                             </div>
                         </div>
                          <button type="submit" class="btn btn-success ">Simpan</button>
