@@ -40,6 +40,8 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth']], function(){
     Route::resource('gaji', GajiController::class);
     Route::resource('pangkat', PangkatController::class);
     Route::get('show-riwayat-pendidikan/{id}', [PegawaiController::class, 'showRiwayatPend'])->name('show.pendidikan');
+    //cetak Daftar PNS
+    Route::get('print-pns', [PegawaiController::class, 'printPDF'])->name('print.pns');
 });
 
 //PNS
