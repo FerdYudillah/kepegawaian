@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <h3 class="card-title"><strong>Usul Kenaikan Gaji Berkala</strong></h3>
                     </div>
-                    <form action="{{ route('simpan.berkala') }}" method="POST">
+                    <form action="{{ route('simpan.berkala') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                          <div class="row">
                             <div class="mb-3 col-md-6">
@@ -110,11 +110,11 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="sk_naik_pangkat_akhir">SK Kenaikan Pangkat Terakhir</label>
-                                    <input type="file" class="form-control col-4 " id="sk_naik_pangkat_akhir" name="sk_naik_pangkat_akhir" required>
+                                    <input type="file" class="form-control col-4 " id="sk_naik_pangkat_akhir" name="sk_naik_pangkat_akhir" >
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="sk_mangku_jabat">SK Pemangku Jabatan</label>
-                                    <input type="file" class="form-control col-4 " id="sk_mangku_jabat" name="sk_mangku_jabat" required>
+                                    <input type="file" class="form-control col-4 " id="sk_mangku_jabat" name="sk_mangku_jabat" >
                             </div>
                         </div>
                         <div class="row">
@@ -128,6 +128,7 @@
                              @enderror
                             </div>
                         </div>
+                        <input name="idUser" type="hidden" value="{{$user->id}}">
                          <button type="submit" class="btn btn-success ">Simpan</button>
                          <a href="{{ route('index.berkala') }}" class="btn btn-warning">Kembali</a>
                     </form>

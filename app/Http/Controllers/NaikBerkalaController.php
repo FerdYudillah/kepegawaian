@@ -59,9 +59,6 @@ class NaikBerkalaController extends Controller
             'sk_cpns' => 'required|max:2048',
         ]);
 
-
-        
-
         if($request->file('sk_berkala_terakhir')){
             $fileModel = new FileNaikBerkala();
             $fileName = time().'_'.$request->file('sk_berkala_terakhir')->getClientOriginalName();
@@ -70,6 +67,7 @@ class NaikBerkalaController extends Controller
             $fileModel->file_berkas=$fileName;
             $fileModel->user_id=$request->idUser;
             $fileModel->save();
+            // dd($fileModel->save());
         }
 
         if($request->file('sk_cpns')){
@@ -81,7 +79,6 @@ class NaikBerkalaController extends Controller
             $fileModel->user_id=$request->idUser;
             $fileModel->save();
         }
-
         $validateData['user_id'] = auth()->user()->id;
         NaikBerkala::create($validateData);
         Alert::success('Sukses', 'Email Atau Password Berhasil Diupdate');
