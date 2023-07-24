@@ -89,31 +89,21 @@
                         </div>
                         <hr>
                         <p><h5><strong>Surat Pengantar :</strong></h5></p>
-                        <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                        <p><strong>Berikut adalah berkas-berkas yang dilampirkan untuk kenaikan pangkat,<br>Silahkan buat berkas-berkas dibawah ini kedalam bentuk File ZIP / RAR :</strong></p>
                         <div class="row mb-4">
                             @include('pegawai\pns\kenaikan\naik_pangkat\pelaksana_staf\kelengkapan')
                         </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_pangkat_terakhir"><span class="text-danger">*</span><strong>Upload FILE ZIP / RAR</strong></label>
-                                    <input type="file" class="form-control col-4 @error('sk_pangkat_terakhir') is-invalid @enderror" id="sk_pangkat_terakhir" name="sk_pangkat_terakhir" >
-                                    @error('sk_pangkat_terakhir')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                           </div>
                            <hr>
                             <p><h5><strong>Pencatuman Gelar Pendidikan bagi yang memiliki ijazah baru dan belum tercantum di SK Kenaikan pangkat Terakhir :</strong></h5></p>
-                            <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                            <p><strong>Berikut adalah berkas-berkas yang dilampirkan untuk kenaikan pangkat,<br>Silahkan buat berkas-berkas dibawah ini kedalam bentuk File ZIP / RAR :</strong></p>
                         <div class="row mb-4">
                             @include('pegawai\pns\kenaikan\naik_pangkat\pelaksana_staf\kelengkapan_pend')
                         </div>
                             <div class="mb-3 col-md-6">
-                                <label for="surat_belajar"><span class="text-danger">*</span><strong>Upload FILE ZIP / RAR</strong></label>
-                                    <input type="file" class="form-control col-4 @error('surat_belajar') is-invalid @enderror" id="surat_belajar" name="surat_belajar" >
-                                    @error('surat_belajar')
+                                <p>Upload Kedua File ZIP atau RAR Tersebut kedalam Google Drive, lalu masukkan Link Google Drive Tersebut Kedalam Form Input (Pastikan Link Google Drive dalam status "Dapat Diakses Semua")</p>
+                                <label for="link"><span class="text-danger">*</span><strong>Masukkan Link Google Drive <i class='bx bxl-google-cloud'></i></strong></label>
+                                    <input type="text" class="form-control col-4 @error('link') is-invalid @enderror" id="link" name="link" >
+                                    @error('link')
                                 <div class="invalid-feedback">
                                 {{ $message }}
                                 </div>

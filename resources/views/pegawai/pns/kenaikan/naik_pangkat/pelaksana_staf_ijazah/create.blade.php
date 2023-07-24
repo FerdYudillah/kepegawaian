@@ -88,13 +88,14 @@
                             </div>
                         </div>
                         <p><h5><strong>Surat Pengantar :</strong></h5></p>
-                        <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                        <p><strong>Berikut adalah berkas-berkas yang dilampirkan untuk kenaikan pangkat,<br>Silahkan buat berkas-berkas dibawah ini kedalam bentuk File ZIP / RAR :</strong></p>
                         <div class="row mb-4">
                             @include('pegawai\pns\kenaikan\naik_pangkat\pelaksana_staf_ijazah\kelengkapan')
                         </div>
                         <div class="row">
                             <div class="mb-3 col-md-6">
-                                <label for="sk_pangkat_terakhir"><span class="text-danger">*</span><strong>Upload FILE ZIP / RAR</strong></label>
+                                <p>Upload Kedua File ZIP atau RAR Tersebut kedalam Google Drive, lalu masukkan Link Google Drive Tersebut Kedalam Form Input (Pastikan Link Google Drive dalam status "Dapat Diakses Semua")</p>
+                                <label for="sk_pangkat_terakhir"><span class="text-danger">*</span><strong>Masukkan Link Google Drive <i class='bx bxl-google-cloud'></i></strong></label>
                                     <input type="file" class="form-control col-4 @error('sk_pangkat_terakhir') is-invalid @enderror" id="sk_pangkat_terakhir" name="sk_pangkat_terakhir" >
                                     @error('sk_pangkat_terakhir')
                                 <div class="invalid-feedback">

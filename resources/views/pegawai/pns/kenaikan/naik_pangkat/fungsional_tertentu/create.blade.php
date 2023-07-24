@@ -88,48 +88,27 @@
                         </div>
                         <hr>
                         <p><h5><strong>Surat Pengantar :</strong></h5></p>
-                        <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                        <p><strong>Berikut adalah berkas-berkas yang dilampirkan untuk kenaikan pangkat,<br>Silahkan buat berkas-berkas dibawah ini kedalam bentuk File ZIP / RAR :</strong></p>
                         <div class="row mb-4">
                             @include('pegawai/pns/kenaikan/naik_pangkat/fungsional_tertentu/kelengkapan')
                         </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_inpassing"><span class="text-danger">*</span><strong>Upload FILE ZIP / RAR</strong></label>
-                                    <input type="file" class="form-control col-4 @error('sk_inpassing') is-invalid @enderror" id="sk_inpassing" name="sk_inpassing" >
-                                    @error('sk_inpassing')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                        </div>
                         <hr>
                         <p><h5><strong>STTPPL Diklat Prajabatan :</strong></h5></p>
-                        <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                        <p><strong>Berikut adalah berkas-berkas yang dilampirkan untuk kenaikan pangkat,<br>Silahkan buat berkas-berkas dibawah ini kedalam bentuk File ZIP / RAR :</strong></p>
                         <div class="row mb-4">
                             @include('pegawai\pns\kenaikan\naik_pangkat\fungsional_tertentu\kelengkapan_diklat')
                         </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="sk_inpassing"><span class="text-danger">*</span><strong>Upload FILE ZIP / RAR</strong></label>
-                                    <input type="file" class="form-control col-4 @error('sk_inpassing') is-invalid @enderror" id="sk_inpassing" name="sk_inpassing" >
-                                    @error('sk_inpassing')
-                                <div class="invalid-feedback">
-                                {{ $message }}
-                                </div>
-                             @enderror
-                            </div>
-                        </div>
                         <hr>
                             <p><h5><strong>Pencatuman Pendidikan Baru :</strong></h5></p>
-                            <p><strong>Silahkan Upload FIle ZIP atau Rar yang berisikan :</strong></p>
+                            <p><strong>Berikut adalah berkas-berkas yang dilampirkan untuk kenaikan pangkat,<br>Silahkan buat berkas-berkas dibawah ini kedalam bentuk File ZIP / RAR :</strong></p>
                             <div class="row mb-4">
                                 @include('pegawai\pns\kenaikan\naik_pangkat\fungsional_tertentu\kelengkapan_pend')
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label for="surat_izin_belajar"><span class="text-danger">*</span><strong>Upload FILE ZIP / RAR</strong></label>
-                                    <input type="file" class="form-control col-4 @error('surat_izin_belajar') is-invalid @enderror" id="surat_izin_belajar" name="surat_izin_belajar" >
-                                    @error('surat_izin_belajar')
+                                <p>Upload Kedua File ZIP atau RAR Tersebut kedalam Google Drive, lalu masukkan Link Google Drive Tersebut Kedalam Form Input (Pastikan Link Google Drive dalam status "Dapat Diakses Semua")</p>
+                                <label for="link"><span class="text-danger">*</span><strong>Masukkan Link Google Drive <i class='bx bxl-google-cloud'></i></strong></label>
+                                    <input type="text" class="form-control col-4 @error('link') is-invalid @enderror" id="link" name="link" >
+                                    @error('link')
                                 <div class="invalid-feedback">
                                 {{ $message }}
                                 </div>
