@@ -73,10 +73,11 @@ Route::group(['prefix' => 'PNS', 'middleware' => ['auth']], function(){
     Route::get('/index-naik-berkala', [NaikBerkalaController::class, 'indexPegawai'])->name('index.berkala');
     Route::post('/naik-berkala-simpan', [App\Http\Controllers\NaikBerkalaController::class, 'simpanData'])->name('simpan.berkala');
 
-    //Route Kenaikan Pangat
+    //Route Kenaikan Pangkat
     Route::get('/menu-naik-pangkat', [NaikPangkatController::class, 'naikPangkatMenu'])->name('menu.naik.pangkat');
     Route::get('/menu-naik-struktural', [NaikPangkatController::class, 'pangkatStrutural'])->name('menu.pangkat.struktural');
     Route::get('/tambah-naik-struktural', [NaikPangkatController::class, 'tambahStruktural'])->name('tambah.pangkat.struktural');
+    Route::post('/simpan-naik-struktural', [NaikPangkatController::class, 'storeStruktrural'])->name('simpan.pangkat.struktural');
     //Pelaksana Staf
     Route::get('/menu-naik-Pelaksana-staf', [NaikPangkatController::class, 'pangkatPelaksanaStaf'])->name('menu.pangkat.pestaf');
     Route::get('/tambah-naik-Pelaksana-staf', [NaikPangkatController::class, 'tambahPelaksanaStaf'])->name('tambah.pangkat.pestaf');
