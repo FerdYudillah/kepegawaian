@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Pangkat;
 use App\Models\NaikPangkat;
 use Illuminate\Http\Request;
+use Alert;
 
 class NaikPangkatController extends Controller
 {
@@ -75,8 +76,8 @@ class NaikPangkatController extends Controller
     public function pangkatStrutural()
     {
         $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.eselon_struktural.riwayat',compact('user'));
+        $naikPangkat = NaikPangkat::where('user_id', $user)->get();
+        return view('pegawai.pns.kenaikan.naik_pangkat.eselon_struktural.riwayat',compact('naikPangkat'));
     }
 
     public function tambahStruktural()
@@ -87,6 +88,22 @@ class NaikPangkatController extends Controller
             ->first(),
             'pangkat' => $pangkat,
         ]);
+    }
+
+    public function storeStruktrural(Request $request)
+    {
+        $validateData = $request->validate([
+            'pangkat_id' => 'required',
+            'mulai_tanggal' => 'required',
+            'naik_selanjutnya' => 'required',
+            'tgl_usulan' => 'required',
+            'link' => 'required',
+        ]);
+
+        $validateData['user_id'] = auth()->user()->id;
+        NaikPangkat::create($validateData);
+        Alert::success('Sukses', 'Data Usul Kenaikan Pangkat Jabatan Eselon Struktural Berhasil Disimpan');
+        return redirect()->route('menu.pangkat.struktural');
     }
 
     public function pangkatPelaksanaStaf()
