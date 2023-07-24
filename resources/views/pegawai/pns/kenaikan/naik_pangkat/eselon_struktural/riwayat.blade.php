@@ -25,16 +25,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
+                            @php
                                  $no = 1;
                             @endphp
-                            @forelse ($naikBerkala as $item)
+                            @forelse ($naikPangkat as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $item->user_pegawai->nip }}</td>
                                 <td>{{ $item->user_pegawai->name }}</td>
-                                <td>{{ $item->gaji_lama }}</td>
-                                <td>{{ $item->gaji_pns->gaji_pokok }}</td>
+                                <td>{{ $item->user_pegawai->kepegawaian_pns->pangkat }}</td>
+                                <td>{{ $item->pangkat_pns->nama_pangkat }}</td>
                                 <td>{{ $item->tgl_usulan }}</td>
                                 <td>{{ $item->ket }}</td>
                                 <td>
@@ -48,7 +48,7 @@
                             </tr>
                             @empty
                             <td colspan="4">Data Tidak Ada</td>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
