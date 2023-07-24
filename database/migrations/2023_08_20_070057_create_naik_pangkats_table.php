@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('naik_selanjutnya')->nullable();
             $table->date('tgl_usulan')->nullable();
             $table->enum('ket', ['Belum Disetujui', 'Disetujui'])->nullable()->default('Belum Disetujui');
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }
