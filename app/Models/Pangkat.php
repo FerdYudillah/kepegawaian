@@ -12,4 +12,9 @@ class Pangkat extends Model
     protected $fillable = [
             'nama_pangkat'
         ];
+
+        public function naikPangkat()
+        {
+            return $this->hasMany(NaikPangkat::class, 'pangkat_id', 'id_pangkat');
+        }
 }

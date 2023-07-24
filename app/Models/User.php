@@ -68,6 +68,11 @@ class User extends Authenticatable
             return $this->hasMany(NaikBerkala::class);
         }
 
+        public function naikPangkat()
+        {
+            return $this->hasMany(naikPangkat::class);
+        }
+
         public function fileBerkas()
     {
         return $this->hasMany(FileNaikBerkala::class);

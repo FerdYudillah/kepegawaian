@@ -30,4 +30,9 @@ class Kepegawaian extends Model
         {
             return $this->hasOne(naikBerkala::class);
         }
+
+        public function naikPankat()
+        {
+            return $this->hasOne(naikPankat::class);
+        }
 }
