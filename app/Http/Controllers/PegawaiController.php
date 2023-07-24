@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Hash;
 use Alert;
+use PDF;
 use App\Models\Anak;
 use App\Models\User;
 use App\Models\Pangkat;
@@ -426,4 +427,15 @@ class PegawaiController extends Controller
         return redirect()->route('home');
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Cetak PDF
+    public function printPDF()
+    {
+        $user = User::all();
+        $pdf = PDF::loadView('admin.pdf.daftar-pns._pdf', compact('user'));
+        $pdf->setPaper('A4', 'landscape');
+        // $pdf->render();
+        return $pdf->stream('Daftar PNS - Satpol PP & Damkar Tapin.pdf', array("Attachment" => false));
+    }
 }

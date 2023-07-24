@@ -7,6 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title mb-3"><Strong>Daftar Pegawai Negeri Sipil Satpol PP & Damkar Tapin</Strong></h3>
+                    <div class="form-group float-right">
+                        <a href="{{ route('print.pns') }}" class="btn btn-success btn-md">Laporan Daftar PNS</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-sm">
