@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="card-header">
                         <h3 class="card-title mb-3"><Strong>Data Kenaikan Gaji Berkala PNS</Strong></h3>
-                        <a href="{{ route('naik-berkala.create') }}" class="btn btn-success">Tambah Data</a>
+                        <a href="{{ route('tambah.berkala') }}" class="btn btn-success">Tambah Data</a>
                     </div>
                     <div class="card-header">
                         <h4><strong>Riwayat Kenaikan Gaji Berkala PNS : {{ auth()->user()->name }} - {{ auth()->user()->nip }}</strong></h4>
@@ -40,6 +40,7 @@
                                 <td>{{ $item->tgl_usulan }}</td>
                                 <td>{{ $item->ket }}</td>
                                 <td>
+                                    <a href="" class="btn btn-success btn-sm"> <i class="bx bx-search"></i></a>
                                    <a href="" class="btn btn-warning btn-sm">  <i class="bx bx-edit"></i></a>
                                    <form onsubmit="return confirm('Yakin Mau Hapus Data??')" action="" method="POST" class="d-inline">
                                     @csrf
