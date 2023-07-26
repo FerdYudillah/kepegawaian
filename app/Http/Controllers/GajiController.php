@@ -8,26 +8,23 @@ use Alert;
 
 class GajiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    //Halaman Data Gaji
     public function index()
     {
          $gaji = Gaji::all();
         return view('admin.master-data.data-gaji.index', compact('gaji'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    //Halaman Tambah Data Gaji
     public function create()
     {
         return view('admin.master-data.data-gaji.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+    //Fungsi Simpan Data Gaji
     public function store(Request $request)
     {
         $gaji = Gaji::create([
@@ -43,25 +40,21 @@ class GajiController extends Controller
         return redirect()->route('gaji.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show()
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
+    //Halaman Edit Data Gaji
     public function edit(Gaji $gaji)
     {
         return view('admin.master-data.data-gaji.edit', compact('gaji'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+    //FUngsi Update Data Gaji
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -72,7 +65,6 @@ class GajiController extends Controller
 
         ]);
 
-        // dd($request);
         $gaji = Gaji::find($id);
         $gaji->update([
             'golongan' => $request->golongan,
@@ -81,15 +73,12 @@ class GajiController extends Controller
             'tahun' => $request->tahun
         ]);
 
-
-
         Alert::success('Info', 'Update Data Pegawai Berhasil');
         return redirect()->route('gaji.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+    //Fungsi Hapus Data Gaji
     public function destroy(Gaji $gaji)
     {
         $gaji->destroy($gaji->id);

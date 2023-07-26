@@ -8,9 +8,7 @@ use Alert;
 
 class PangkatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //Halaman Data Pangkat
     public function index()
     {
         $pangkat = Pangkat::all();
@@ -20,6 +18,7 @@ class PangkatController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    //Halaman Tambah Data Pangkat
     public function create()
     {
         return view('admin.master-data.data-pangkat.create');
@@ -28,6 +27,7 @@ class PangkatController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    //Fungsi Simpan Data Pangkat
     public function store(Request $request)
     {
         $pangkat = Pangkat::create([
@@ -49,6 +49,7 @@ class PangkatController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    //Halaman Edit Data Pangkat
     public function edit($id)
     {
         $pangkat = Pangkat::where('id_pangkat', $id)->first();
@@ -58,6 +59,7 @@ class PangkatController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    //Fungsi UPdate Data Pangkat
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -75,6 +77,7 @@ class PangkatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    //Fungsi Hapus Data Pangkat
     public function destroy(string $id)
     {
         Pangkat::where('id_pangkat',$id)->delete();

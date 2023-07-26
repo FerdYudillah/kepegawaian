@@ -24,45 +24,70 @@ class PegawaiController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     //--ADMIN--//
+     //Halaman Daftar PNS
     public function index()
     {
         $user = User::all();
         return view('pegawai.admin.index', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
+    //Menuju Halaman Profile PNS (ADMIN)
     public function show($id)
     {
         $user = User::find($id);
         return view('pegawai.admin.profile-pegawai.view',compact('user'));
     }
 
+    //Menuju Halaman Riwayat Pendidikan (ADMIN)
     public function showRiwayatPend($id)
     {
-        // $user = auth()->id();
+
         $pendidikan = Pendidikan::where('user_id', $id)->get();
         return view('pegawai\admin\pendidikan\riwayat_pend',compact('pendidikan'));
 
     }
 
+      //Cetak PDF (Laporan Daftar PNS)
+      public function printPDF()
+      {
+          $user = User::all();
+          $pdf = PDF::loadView('admin.pdf.daftar-pns._pdf', compact('user'));
+          $pdf->setPaper('A4', 'landscape');
+          return $pdf->stream('Daftar PNS - Satpol PP & Damkar Tapin.pdf', array("Attachment" => false));
+      }
+
+    public function create()
+    {
+        //
+    }
+
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+
+    public function edit(User $user)
+    {
+        // $user = User::find(auth()->user()->id);
+        // return view('pegawai.pns.edit',compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+    }
+
+    public function destroy(string $id)
+    {
+        //
+    }
+
+
+    //--PEGFAWAI--..
+    //Halaman Profile Pegawai
     public function showPegawai(User $user)
     {
 
@@ -72,23 +97,7 @@ class PegawaiController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        $user = User::find(auth()->user()->id);
-        return view('pegawai.pns.edit',compact('user'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-    }
-
-    //Function Update Data Pribadi PNS
+    //Fungsi Update Data Pribadi PNS
     public function updateData(Request $request, $id)
     {
         $request->validate([
@@ -142,6 +151,8 @@ class PegawaiController extends Controller
         return redirect()->route('show.pegawai');
     }
 
+
+    //Fungsi Upload Foto (BELUM BERHASIL)
     public function uploadFoto(Request $request, User $user)
     {
         $validatedData = $request->validate ([
@@ -156,6 +167,7 @@ class PegawaiController extends Controller
         Alert::success('Sukses', 'Foto Profile Berhasil Diubah');
         return redirect()->route('show.pegawai');
     }
+
 
     //Function Update Data Kepegawaian PNS
     public function updateKepegawaian(Request $request, $id)
@@ -196,6 +208,8 @@ class PegawaiController extends Controller
         return back();
     }
 
+
+    //Fungsi Update Data Suami Istri
     public function updateSI (Request $request)
     {
         $request->validate([
@@ -224,11 +238,13 @@ class PegawaiController extends Controller
         return back();
     }
 
+    //Menuju Halaman Tambah Data Anak
     public function createAnak()
     {
         return view('pegawai.pns.anak.input_anak');
     }
 
+    //Fungsi Simpan Data Anak
     public function anakCreate(Request $request)
     {
         $request->validate([
@@ -254,6 +270,7 @@ class PegawaiController extends Controller
 
     }
 
+    //Menuju halaman Edit Data Anak
     public function editAnak($id)
     {
 
@@ -262,6 +279,8 @@ class PegawaiController extends Controller
         return view('pegawai.pns.anak.edit_anak', compact('anak'));
     }
 
+
+    //Fungsi Update Data Anak
     public function updateAnak(Request $request, $id)
     {
         $request->validate([
@@ -287,13 +306,121 @@ class PegawaiController extends Controller
             return redirect()->route('show.pegawai');
     }
 
+    //FUngsi Hapus Anak (BELUM)
 
-    public function destroy(string $id)
+
+       //Halaman Riwayat Pendidikan
+       public function menuPendidikan()
+       {
+           $user = User::find(auth()->user()->id);
+           return view('pegawai\pns\pendidikan\riwayat_pend', compact('user'));
+       }
+
+       // Menuju Halaman Tambah Data Riwayat Pendidikan
+       public function createPendidikan()
+       {
+           return view('pegawai.pns.pendidikan.tambah_pend');
+       }
+
+       //Fungsi Simpan Data Riwayat Pendidikan
+       public function storePendidikan(Request $request)
+       {
+               $validateData = $request->validate([
+                   'no_ijazah' => 'required',
+                   'tgl_ijazah' => 'required',
+                   'tingkat_pendidikan' => 'required',
+                   'lembaga_pendidikan' => 'required',
+                   'jurusan' => 'required',
+                   'kota' => 'required',
+                   'tahun_lulus' => 'required',
+               ]);
+
+               $validateData['user_id'] = auth()->user()->id;
+               Pendidikan::create($validateData);
+               Alert::success('Sukses', 'Data Riwayat Pendidikan Berhasil Disimpan');
+               return redirect()->route('riwayat.pend');
+       }
+
+       //Menuju Halaman Edit Riwayat Pendidikan
+       public function editPendidikan($id)
+       {
+           $user = auth()->id();
+           $pendidikan = Pendidikan::where('id_pendidikan', $id)->where('user_id', $user)->first();
+           return view('pegawai\pns\pendidikan\edit_pend', compact('pendidikan'));
+       }
+
+       //FUngsi Update Riwayat Pendidikan
+       public function updatePendidikan(Request $request, $id)
+       {
+           $request->validate([
+               'no_ijazah' => 'required',
+               'tgl_ijazah' => 'required',
+               'tingkat_pendidikan' => 'required',
+               'lembaga_pendidikan' => 'required',
+               'jurusan' => 'required',
+               'kota' => 'required',
+               'tahun_lulus' => 'required',
+           ]);
+
+               $data = [
+                   'no_ijazah' => $request->input('no_ijazah'),
+                   'tgl_ijazah' => $request->input('tgl_ijazah'),
+                   'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),
+                   'lembaga_pendidikan' => $request->input('lembaga_pendidikan'),
+                   'jurusan' => $request->input('jurusan'),
+                   'kota' => $request->input('kota'),
+                   'tahun_lulus' => $request->input('tahun_lulus'),
+               ];
+
+               Pendidikan::where('id_pendidikan',$id)->update($data);
+
+               Alert::success('Sukses', 'Data Riwayat Pendidikan Berhasil Diubah');
+               return redirect()->route('riwayat.pend');
+       }
+
+
+       //Fungsi Hapus Riwayat Pendidikan
+       public function hapusPendidikan($id)
+        {
+           Pendidikan::where('id_pendidikan',$id)->delete();
+           Alert::success('Hapus', 'Data Riwayat Pendidikan Telah Dihapus');
+           return redirect()->route('riwayat.pend');
+       }
+
+
+    //Halaman Tambah Data Diklat PNS
+    public function tambahDiklat()
     {
-        //
+        return view('pegawai.pns.diklat.create_diklat');
     }
 
-    public function fetchPadaringan(){
+    //Fungsi Simpan Data Diklat
+    public function storeDiklat(Request $request)
+    {
+        $validateData = $request->validate([
+            'nama_diklat' => 'required',
+            'penyelenggara' => 'required',
+            'tempat_diklat' => 'required',
+            'tgl_pelaksanaan' => 'required',
+            'tgl_selesai' => 'required',
+            'no_sttpl' => 'required',
+            'ttd_pejabat' => 'required',
+        ]);
+
+        $validateData['user_id'] = auth()->user()->id;
+        diklat::create($validateData);
+        Alert::success('Sukses', 'Data Diklat Berhasil Disimpan');
+        return redirect()->route('show.pegawai');
+    }
+
+    //Halaman Edit Diklat (Belum)
+    //Fungsi Edit Diklat (Belum)
+    //Fungsi Hapus Diklat (Belum)
+
+
+
+     //API Untuk Mengabil Data Dari Padaringan
+     public function fetchPadaringan(){
         set_time_limit(60);
         $token='5270c4c4b3308e7938692bbf04c00716';
         $response = Http::get('https://padaringan.bkpsdm.tapinkab.go.id/api/pns/',[
@@ -327,113 +454,14 @@ class PegawaiController extends Controller
         $dbpg['satuan_kerja']=$data['satuan_kerja'];
         $user->kepegawaian_pns()->update($dbpg);
 
+        Alert::success('Sukses', 'Data Padaringan Berhasi Dimuat');
         return redirect()->back();
     }
 
 
-    //Riwayat Pendidikan
-    public function menuPendidikan()
-    {
-        $user = User::find(auth()->user()->id);
-        return view('pegawai\pns\pendidikan\riwayat_pend', compact('user'));
-    }
-
-    public function createPendidikan()
-    {
-        return view('pegawai.pns.pendidikan.tambah_pend');
-    }
-
-    public function storePendidikan(Request $request)
-    {
-            $validateData = $request->validate([
-                'no_ijazah' => 'required',
-                'tgl_ijazah' => 'required',
-                'tingkat_pendidikan' => 'required',
-                'lembaga_pendidikan' => 'required',
-                'jurusan' => 'required',
-                'kota' => 'required',
-                'tahun_lulus' => 'required',
-            ]);
-
-            $validateData['user_id'] = auth()->user()->id;
-            Pendidikan::create($validateData);
-            Alert::success('Sukses', 'Data Riwayat Pendidikan Berhasil Disimpan');
-            return redirect()->route('riwayat.pend');
-    }
-
-    public function editPendidikan($id)
-    {
-        $user = auth()->id();
-        $pendidikan = Pendidikan::where('id_pendidikan', $id)->where('user_id', $user)->first();
-        return view('pegawai\pns\pendidikan\edit_pend', compact('pendidikan'));
-    }
-
-    public function updatePendidikan(Request $request, $id)
-    {
-        $request->validate([
-            'no_ijazah' => 'required',
-            'tgl_ijazah' => 'required',
-            'tingkat_pendidikan' => 'required',
-            'lembaga_pendidikan' => 'required',
-            'jurusan' => 'required',
-            'kota' => 'required',
-            'tahun_lulus' => 'required',
-        ]);
-
-            $data = [
-                'no_ijazah' => $request->input('no_ijazah'),
-                'tgl_ijazah' => $request->input('tgl_ijazah'),
-                'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),
-                'lembaga_pendidikan' => $request->input('lembaga_pendidikan'),
-                'jurusan' => $request->input('jurusan'),
-                'kota' => $request->input('kota'),
-                'tahun_lulus' => $request->input('tahun_lulus'),
-            ];
-
-            Pendidikan::where('id_pendidikan',$id)->update($data);
-
-            Alert::success('Sukses', 'Data Riwayat Pendidikan Berhasil Diubah');
-            return redirect()->route('riwayat.pend');
-    }
-
-    public function hapusPendidikan($id)
-     {
-        Pendidikan::where('id_pendidikan',$id)->delete();
-        Alert::success('Hapus', 'Data Riwayat Pendidikan Telah Dihapus');
-        return redirect()->route('riwayat.pend');
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //Halaman Diklat PNS
-    public function tambahDiklat()
-    {
-        return view('pegawai.pns.diklat.create_diklat');
-    }
-
-    public function storeDiklat(Request $request)
-    {
-        $validateData = $request->validate([
-            'nama_diklat' => 'required',
-            'penyelenggara' => 'required',
-            'tempat_diklat' => 'required',
-            'tgl_pelaksanaan' => 'required',
-            'tgl_selesai' => 'required',
-            'no_sttpl' => 'required',
-            'ttd_pejabat' => 'required',
-        ]);
-
-        $validateData['user_id'] = auth()->user()->id;
-        diklat::create($validateData);
-        Alert::success('Sukses', 'Data Diklat Berhasil Disimpan');
-        return redirect()->route('show.pegawai');
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public function changePassword(User $user)
     {
-
         $user = User::findOrFail(auth()->user()->id);
         return view('user.edit_pass', compact('user'));
     }
@@ -452,15 +480,4 @@ class PegawaiController extends Controller
         return redirect()->route('home');
     }
 
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Cetak PDF
-    public function printPDF()
-    {
-        $user = User::all();
-        $pdf = PDF::loadView('admin.pdf.daftar-pns._pdf', compact('user'));
-        $pdf->setPaper('A4', 'landscape');
-        // $pdf->render();
-        return $pdf->stream('Daftar PNS - Satpol PP & Damkar Tapin.pdf', array("Attachment" => false));
-    }
 }
