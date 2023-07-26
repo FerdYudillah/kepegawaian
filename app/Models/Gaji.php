@@ -11,8 +11,10 @@ class Gaji extends Model
     use HasFactory;
     protected $table = 'gajis';
     protected $fillable = [
-            'golongan', 'masa_kerja',
-            'gaji_pokok', 'tahun',
+            'golongan',
+            'masa_kerja',
+            'gaji_pokok',
+            'tahun',
         ];
 
 

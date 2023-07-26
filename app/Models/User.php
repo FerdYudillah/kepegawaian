@@ -22,9 +22,17 @@ class User extends Authenticatable
      */
     protected $table = 'users';
     protected $fillable = [
-            'nip', 'name', 't_lahir', 'tgl_lahir', 'alamat',
-            'jenis_kelamin', 'nohp', 'agama', 'status_kawin',
-            'pendidikan', 'jumlah_anak', 'nik',
+            'nip',
+            'name',
+            't_lahir',
+            'tgl_lahir',
+            'alamat',
+            'jenis_kelamin',
+            'nohp', 'agama',
+            'status_kawin',
+            'pendidikan',
+             'jumlah_anak',
+             'nik',
             'no_kk',
             'no_rek',
             'npwp',

@@ -10,8 +10,13 @@ class Kepegawaian extends Model
     use HasFactory;
     protected $table = 'kepegawaians';
     protected $fillable = [
-            'user_id','pangkat','golongan','jabatan',
-            'jenis_jabatan','status_pegawai', 'masa_kerja',
+            'user_id',
+            'pangkat',
+            'golongan',
+            'jabatan',
+            'jenis_jabatan',
+            'status_pegawai',
+            'masa_kerja',
             'gaji',
             'satuan_kerja',
             'nomor_sk_cpns',
