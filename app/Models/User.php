@@ -78,6 +78,11 @@ class User extends Authenticatable
         return $this->hasMany(FileNaikBerkala::class);
     }
 
+    public function diklat_pns()
+    {
+        return $this->hasMany(diklat::class);
+    }
+
 
     // protected $guarded = ['id'];
 
