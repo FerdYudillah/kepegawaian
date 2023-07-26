@@ -7,6 +7,10 @@ use App\Models\Pangkat;
 use App\Models\NaikPangkat;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\NaikPangkatFT;
+use App\Models\NaikPangkatPS;
+use App\Models\NaikPangkatPSI;
+use PhpParser\Node\Stmt\Return_;
 
 class NaikPangkatController extends Controller
 {
@@ -15,7 +19,7 @@ class NaikPangkatController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -67,12 +71,59 @@ class NaikPangkatController extends Controller
     }
 
 
+    //--ADMIN--
+    //Menu Kenaikan Pangkat
+    public function naikPangkatMenuAdmin()
+    {
+        return view('pegawai.admin.kenaikan.naik-pangkat.menu');
+    }
 
+    //Halaman Data Kenaikan Pangkat PNS Jabtan Reguler Eselon Struktural
+    public function AdminStruktural()
+    {
+        $naikPangkat = NaikPangkat::all();
+        return view('pegawai.admin.kenaikan.naik-pangkat.eselon-struktural.index', compact('naikPangkat'));
+    }
+
+    //Halaman Data Kenaikan Pangkat PNS Jabtan Pelaksana/Staf
+    public function AdminPS()
+    {
+
+        $naikPangkat = NaikPangkatPS::all();
+        return view('pegawai.admin.kenaikan.naik-pangkat.pelaksana_staf.index', compact('naikPangkat'));
+
+    }
+
+    //Halaman Data Kenaikan Pangkat PNS Jabtan Pelaksana/Staf Penyesuaian Ijazah
+    public function AdminPSI()
+    {
+
+        $naikPangkat = NaikPangkatPS::all();
+        return view('pegawai.admin.kenaikan.naik-pangkat.pelaksana_staf_ijazah.index',compact('naikPangkat'));
+
+    }
+
+    //Halaman Data Kenaikan Pangkat PNS Jabtan Fungsional Tertentu
+    public function AdminFT()
+    {
+
+        $naikPangkat = naikPangkatFt::all();
+        return view('pegawai.admin.kenaikan.naik-pangkat.fungsional_tertentu.index', compact('naikPangkat'));
+
+    }
+
+
+
+    //--PEGAWAI--
+    //Menu Kenaikan Pangkat
     public function naikPangkatMenu()
     {
         return view('pegawai.pns.kenaikan.naik_pangkat.menu');
     }
 
+
+    // ---Jabatan Reguler Eselon Struktural----
+    //Halaman Riwayat
     public function pangkatStrutural()
     {
         $user = auth()->id();
@@ -80,6 +131,7 @@ class NaikPangkatController extends Controller
         return view('pegawai.pns.kenaikan.naik_pangkat.eselon_struktural.riwayat',compact('naikPangkat'));
     }
 
+    //Halaman Tambah Data Kenaikan Pangkat Jabatan Reguler Eselon Struktural
     public function tambahStruktural()
     {
         $pangkat = Pangkat::get();
@@ -90,6 +142,7 @@ class NaikPangkatController extends Controller
         ]);
     }
 
+    //Fungsi Simpan Data Kenaikan Pangkat Jabatan Reguler Eselon Struktural
     public function storeStruktrural(Request $request)
     {
         $validateData = $request->validate([
@@ -106,13 +159,21 @@ class NaikPangkatController extends Controller
         return redirect()->route('menu.pangkat.struktural');
     }
 
+    //Halaman Edit (Belum Ada)
+    //Fungsi Update (Belum Ada)
+    //Halaman Detail (Belum Ada
+
+
+    // ---Jabatan Pelaksana/Staf----
+    //Halaman Riwayat
     public function pangkatPelaksanaStaf()
     {
         $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf.riwayat',compact('user'));
+        $naikPangkat = NaikPangkatPS::where('user_id', $user)->get();
+        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf.riwayat',compact('naikPangkat'));
     }
 
+    //Halaman Tambah Data Kenaikan Pangkat Jabatan Pelaksana/Staf
     public function tambahPelaksanaStaf()
     {
         $pangkat = Pangkat::get();
@@ -123,14 +184,23 @@ class NaikPangkatController extends Controller
         ]);
     }
 
-    //Naik Pangkat PNS Jabatan Pelaksana/Staf Penyesuaian Ijazah :
+    //Fungsi Simpan (Belum Ada)
+    //Halaman Edit (Belum Ada)
+    //Fungsi Update (Belum Ada)
+    //Halaman Detail (Belum Ada
+
+
+
+    // ---Jabatan Reguler Jabatan Pelaksana/Staf Penyesuaian Ijazah----
+    //Halaman Riwayat Kenaikan Pangkat Jabatan Pelaksana/Staf Penyesuaian Ijazah
     public function pangkatPeStafijazah()
     {
         $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf_ijazah.riwayat',compact('user'));
+        $naikPangkat = NaikPangkatPSI::where('user_id', $user)->get();
+        return view('pegawai.pns.kenaikan.naik_pangkat.pelaksana_staf_ijazah.riwayat',compact('naikPangkat'));
     }
 
+    //Halaman Tambah Data Kenaikan Pangkat Jabatan Pelaksana/Staf Penyesuaian Ijazah
     public function tambahPSI()
     {
         $pangkat = Pangkat::get();
@@ -141,14 +211,22 @@ class NaikPangkatController extends Controller
         ]);
     }
 
-    //Naik Pangkat PNS Jabatan Fungsional Tertentu :
+    //Fungsi Simpan (Belum Ada)
+    //Halaman Edit (Belum Ada)
+    //Fungsi Update (Belum Ada)
+    //Halaman Detail (Belum Ada
+
+
+    // ---Jabatan Reguler Jabatan Fungsional Tertentu----
+    //Halaman Riwayat Kenaikan Pangkat Jabatan Funsional Tertentu
     public function naikPangkatFt()
     {
         $user = auth()->id();
-        $user = NaikPangkat::where('user_id', $user)->get();
-        return view('pegawai.pns.kenaikan.naik_pangkat.fungsional_tertentu.riwayat',compact('user'));
+        $naikPangkat = NaikPangkatFT::where('user_id', $user)->get();
+        return view('pegawai.pns.kenaikan.naik_pangkat.fungsional_tertentu.riwayat',compact('naikPangkat'));
     }
 
+    //Halaman Tambah Data Kenaikan Pangkat Jabatan Fungsional tertentu
     public function tambahFt()
     {
         $pangkat = Pangkat::get();
@@ -158,4 +236,10 @@ class NaikPangkatController extends Controller
             'pangkat' => $pangkat,
         ]);
     }
+
+    //Fungsi Simpan (Belum Ada)
+    //Halaman Edit (Belum Ada)
+    //Fungsi Update (Belum Ada)
+    //Halaman Detail (Belum Ada
+
 }
