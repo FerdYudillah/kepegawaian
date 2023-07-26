@@ -11,14 +11,26 @@ use Alert;
 
 class NaikBerkalaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
     }
 
+    //--ADMIN--
+    //Halaman index Data Kenaikan Gaji Berkala Admin
+    public function indexAdmin()
+    {
+        $naikBerkala = NaikBerkala::all();
+        return view('pegawai.admin.kenaikan.naik-gaji-berkala.index',compact('naikBerkala'));
+    }
+
+    //Halaman Detail (Belum)
+    //Fungsi hapus Belum(Belum)
+
+
+    //--PEGAWAI--
+    //Halaman Riwayat Kenaikan Gaji Berkala PNS
     public function indexPegawai()
     {
 
@@ -27,10 +39,8 @@ class NaikBerkalaController extends Controller
         return view('pegawai.pns.kenaikan.naik_gaji_berkala.riwayat',compact('naikBerkala'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    //Halaman Tambah Data kenaikan gaji berkala PNS
+    public function createNaikBerkala()
     {
         $gaji = Gaji::get();
         return view('pegawai.pns.kenaikan.naik_gaji_berkala.create', [
@@ -40,14 +50,7 @@ class NaikBerkalaController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
+    //Fungsi Simpan Data Kenaikan gaji berkala pns
     public function simpanData(Request $request)
     {
         $validateData = $request->validate([
@@ -55,8 +58,10 @@ class NaikBerkalaController extends Controller
             'mulai_tanggal' => 'required',
             'naik_selanjutnya' => 'required',
             'tgl_usulan' => 'required',
-            'sk_berkala_terakhir' => 'required|max:2048',
-            'sk_cpns' => 'required|max:2048',
+            'sk_berkala_terakhir' => 'required|mimes:pdf|max:2048',
+            'sk_cpns' => 'required|mimes:pdf|max:2048',
+            'sk_naik_pangkat_akhir' => 'required|mimes:pdf|max:2048',
+            'sk_mangku_jabat' => 'required|mimes:pdf|max:2048',
         ]);
 
         if($request->file('sk_berkala_terakhir')){
@@ -79,11 +84,49 @@ class NaikBerkalaController extends Controller
             $fileModel->user_id=$request->idUser;
             $fileModel->save();
         }
+
+        if($request->file('sk_naik_pangkat_akhir')){
+            $fileModel = new FileNaikBerkala();
+            $fileName = time().'_'.$request->file('sk_naik_pangkat_akhir')->getClientOriginalName();
+            $filePath = $request->file('sk_naik_pangkat_akhir')->storeAs('uploads/sk-naik-pangkat-terakhir', $fileName, 'public');
+            $fileModel->file_berkas_path = '/storage/' . $filePath;
+            $fileModel->file_berkas=$fileName;
+            $fileModel->user_id=$request->idUser;
+            $fileModel->save();
+        }
+
+        if($request->file('sk_mangku_jabat')){
+            $fileModel = new FileNaikBerkala();
+            $fileName = time().'_'.$request->file('sk_mangku_jabat')->getClientOriginalName();
+            $filePath = $request->file('sk_mangku_jabat')->storeAs('uploads/sk-pemangku-jabatan', $fileName, 'public');
+            $fileModel->file_berkas_path = '/storage/' . $filePath;
+            $fileModel->file_berkas=$fileName;
+            $fileModel->user_id=$request->idUser;
+            $fileModel->save();
+        }
         $validateData['user_id'] = auth()->user()->id;
         NaikBerkala::create($validateData);
-        Alert::success('Sukses', 'Email Atau Password Berhasil Diupdate');
+        Alert::success('Sukses', 'Data Kenaikan Gaji Berkala Berhasil Ditambahkan');
         return redirect()->route('index.berkala');
     }
+
+    //Halaman Edit (Belum)
+    //Fungsi Update (Belum)
+    //Halaman Detail (Belum)
+    //Fungsi hapus Belum(Belum)
+
+    public function create()
+    {
+
+    }
+
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+
     /**
      * Display the specified resource.
      */
