@@ -16,12 +16,16 @@
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Data Keluarga</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-testing-tab" data-bs-toggle="pill" data-bs-target="#pills-testing" type="button" role="tab" aria-controls="pills-testing" aria-selected="false">Data Diklat</button>
+                          </li>
 
                       </ul>
                       <div class="tab-content" id="pills-tabContent">
                         @include('pegawai\admin\profile-pegawai\tab_pane\tab_pribadi')
                         @include('pegawai\admin\profile-pegawai\tab_pane\tab_kepegawaian')
                         @include('pegawai\admin\profile-pegawai\tab_pane\tab_keluarga')
+                        @include('pegawai\admin\profile-pegawai\tab_pane\tab_diklat')
                       </div>
                 </div>
             </div>
