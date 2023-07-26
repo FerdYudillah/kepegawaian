@@ -67,12 +67,12 @@
         </a>
         <ul class="menu-sub">
           <li class="menu-item">
-            <a href="pages-account-settings-account.html" class="menu-link">
+            <a href="{{ route('data.naikPangkat') }}" class="menu-link">
               <div data-i18n="Data Jabatan">Data Kenaikan Pangkat PNS</div>
             </a>
           </li>
           <li class="menu-item">
-            <a href="pages-account-settings-notifications.html" class="menu-link">
+            <a href="{{ route('berkala.admin') }}" class="menu-link">
               <div data-i18n="Data Golongan">Data Kenaikan Gaji Berkala PNS</div>
             </a>
           </li>
