@@ -7,8 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title mb-3"><Strong>Data Kenaikan Pangkat PNS Jabatan Pelaksana/Staf</Strong></h3>
-                    <h5>Riwayat Pangkat PNS Jabatan Pelaksana/Staf : {{ auth()->user()->name }} - {{ auth()->user()->nip }}</h5>
-                    <a href="{{ route('tambah.pangkat.pestaf') }}" class="btn btn-warning">Tambah Data</a>
+                    <p>Merupakan Seluruh Data PNS yang Mengusulkan Kenaikan Pangkat Untuk Jabatan Pelaksana/Staf</p>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-sm">

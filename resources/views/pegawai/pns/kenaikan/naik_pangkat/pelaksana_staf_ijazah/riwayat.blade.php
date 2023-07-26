@@ -25,19 +25,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
+                            @php
                                  $no = 1;
                             @endphp
-                            @forelse ($naikBerkala as $item)
+                            @forelse ($naikPangkat as $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $item->user_pegawai->nip }}</td>
                                 <td>{{ $item->user_pegawai->name }}</td>
-                                <td>{{ $item->gaji_lama }}</td>
-                                <td>{{ $item->gaji_pns->gaji_pokok }}</td>
+                                <td>{{ $item->user_pegawai->kepegawaian_pns->pangkat }}</td>
+                                <td>{{ $item->pangkat_pns->nama_pangkat }}</td>
                                 <td>{{ $item->tgl_usulan }}</td>
                                 <td>{{ $item->ket }}</td>
                                 <td>
+                                    <a href="" class="btn btn-success btn-sm"> <i class="bx bx-search"></i></a>
                                    <a href="" class="btn btn-warning btn-sm">  <i class="bx bx-edit"></i></a>
                                    <form onsubmit="return confirm('Yakin Mau Hapus Data??')" action="" method="POST" class="d-inline">
                                     @csrf
@@ -48,7 +49,7 @@
                             </tr>
                             @empty
                             <td colspan="4">Data Tidak Ada</td>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

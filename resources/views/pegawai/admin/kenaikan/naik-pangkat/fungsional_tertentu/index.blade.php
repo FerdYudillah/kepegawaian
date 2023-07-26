@@ -1,14 +1,13 @@
 @extends('layouts.new_app')
-<title>APK-KMK | Data Kenaikan Pangkat PNS Jabatan Pelaksana/Staf - Satpol PP & Damkar Tapin</title>
+<title>APK-KMK | Data Kenaikan Pangkat PNS Jabatan Fungsional Tertentu - Satpol PP & Damkar Tapin</title>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title mb-3"><Strong>Data Kenaikan Pangkat PNS Jabatan Pelaksana/Staf</Strong></h3>
-                    <h5>Riwayat Pangkat PNS Jabatan Pelaksana/Staf : {{ auth()->user()->name }} - {{ auth()->user()->nip }}</h5>
-                    <a href="{{ route('tambah.pangkat.pestaf') }}" class="btn btn-warning">Tambah Data</a>
+                    <h3 class="card-title mb-3"><Strong>Data Kenaikan Pangkat PNS Jabatan Fungsional Tertentu</Strong></h3>
+                    <p>Merupakan Seluruh Data PNS yang Mengusulkan Kenaikan Pangkat Untuk Jabatan Fungsional Tertentu</p>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-sm">

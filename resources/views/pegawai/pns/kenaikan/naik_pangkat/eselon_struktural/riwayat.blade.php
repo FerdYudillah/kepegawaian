@@ -38,6 +38,7 @@
                                 <td>{{ $item->tgl_usulan }}</td>
                                 <td>{{ $item->ket }}</td>
                                 <td>
+                                    <a href="" class="btn btn-success btn-sm"> <i class="bx bx-search"></i></a>
                                    <a href="" class="btn btn-warning btn-sm">  <i class="bx bx-edit"></i></a>
                                    <form onsubmit="return confirm('Yakin Mau Hapus Data??')" action="" method="POST" class="d-inline">
                                     @csrf
