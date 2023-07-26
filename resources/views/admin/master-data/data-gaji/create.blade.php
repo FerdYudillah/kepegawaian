@@ -17,18 +17,15 @@
                                 <input class="form-control" type="text"id="golongan" name="golongan" value=""/>
                             </div>
 
-
                             <div class="mb-3 col-md-6">
                                 <label for="masa_kerja" class="form-label">Masa Kerja</label>
                                 <input class="form-control" type="text"id="masa_kerja" name="masa_kerja" value=""/>
                             </div>
 
-
                             <div class="mb-3 col-md-6">
                                 <label for="gaji_pokok" class="form-label">Gaji Pokok</label>
                                 <input class="form-control" type="text"id="gaji_pokok" name="gaji_pokok" value=""/>
                             </div>
-
 
                             <div class="mb-3 col-md-6">
                                 <label for="tahun" class="form-label">Tahun Gaji</label>
