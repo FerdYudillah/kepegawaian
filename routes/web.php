@@ -69,6 +69,10 @@ Route::group(['prefix' => 'PNS', 'middleware' => ['auth']], function(){
     Route::get('/fetchPadaringan', [PegawaiController::class, 'fetchPadaringan'])->name('get.padaringan');
     Route::resource('anak', AnakController::class);
 
+    //Route Data Diklat :
+    Route::get('/tambah-diklat', [PegawaiController::class, 'tambahDiklat'])->name('tambah.diklat');
+    Route::post('/simpan-diklat', [PegawaiController::class, 'storeDiklat'])->name('simpan.diklat');
+
     //Route Kenaikan Gaji Berkala :
     Route::get('/index-naik-berkala', [NaikBerkalaController::class, 'indexPegawai'])->name('index.berkala');
     Route::post('/naik-berkala-simpan', [App\Http\Controllers\NaikBerkalaController::class, 'simpanData'])->name('simpan.berkala');

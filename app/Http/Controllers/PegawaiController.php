@@ -6,6 +6,7 @@ use Hash;
 use Alert;
 use PDF;
 use App\Models\Anak;
+use App\Models\diklat;
 use App\Models\User;
 use App\Models\Pangkat;
 use App\Models\Pendidikan;
@@ -402,7 +403,31 @@ class PegawaiController extends Controller
         return redirect()->route('riwayat.pend');
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Halaman Diklat PNS
+    public function tambahDiklat()
+    {
+        return view('pegawai.pns.diklat.create_diklat');
+    }
+
+    public function storeDiklat(Request $request)
+    {
+        $validateData = $request->validate([
+            'nama_diklat' => 'required',
+            'penyelenggara' => 'required',
+            'tempat_diklat' => 'required',
+            'tgl_pelaksanaan' => 'required',
+            'tgl_selesai' => 'required',
+            'no_sttpl' => 'required',
+            'ttd_pejabat' => 'required',
+        ]);
+
+        $validateData['user_id'] = auth()->user()->id;
+        diklat::create($validateData);
+        Alert::success('Sukses', 'Data Diklat Berhasil Disimpan');
+        return redirect()->route('show.pegawai');
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
