@@ -33,11 +33,6 @@
     <h2 style="text-align: center">Laporan Daftar PNS</h2>
     <hr>
     <div>
-        <div style="float: right;margin-right: 4rem;">
-            test
-            <br>
-            <br>
-        </div>
     </div>
     <br>
     <table>
