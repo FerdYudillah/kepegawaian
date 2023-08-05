@@ -7,6 +7,7 @@ use App\Models\Pangkat;
 use App\Models\NaikPangkat;
 use Illuminate\Http\Request;
 use Alert;
+use PDF;
 use App\Models\NaikPangkatFT;
 use App\Models\NaikPangkatPS;
 use App\Models\NaikPangkatPSI;
@@ -242,4 +243,12 @@ class NaikPangkatController extends Controller
     //Fungsi Update (Belum Ada)
     //Halaman Detail (Belum Ada
 
+
+    public function cetakListNP()
+    {
+          $naikPangkat = NaikPangkat::all();
+          $pdf = PDF::loadView('admin.pdf.daftar-kenaikan.naik-pangkat._pdf', compact('naikPangkat'));
+          $pdf->setPaper('A4', 'landscape');
+          return $pdf->stream('Rekap Kenaikan Pangkat PNS - Satpol PP & Damkar Tapin.pdf', array("Attachment" => false));
+    }
 }

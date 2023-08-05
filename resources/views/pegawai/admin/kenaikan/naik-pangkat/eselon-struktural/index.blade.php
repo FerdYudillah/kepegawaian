@@ -8,6 +8,14 @@
                 <div class="card-header">
                     <h3 class="card-title mb-3"><Strong>Data Kenaikan Pangkat PNS Jabatan Reguler Eselon Struktural</Strong></h3>
                     <p>Merupakan Seluruh Data PNS yang Mengusulkan Kenaikan Pangkat Untuk Jabatan Reguler Eselon Struktural</p>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class='bx bxs-printer'></i>
+                            Cetak
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="{{ route('cetak.naikPangkat') }}" target="_blank">PDF <i class='bx bxs-file-pdf' ></i></a></li>
+                            </ul>
+                        </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-sm">

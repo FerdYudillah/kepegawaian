@@ -32,34 +32,33 @@
 <body>
     <h2 style="text-align: center">Laporan Daftar PNS</h2>
     <hr>
-    <table width="770">
-        <center>
-            <font size="4"><b>DAFTAR PEGAWAI NEGERI SIPIL</b></font><br>
-        </center>
-    </table>
-    <p style="text-align: right">Tanggal : Rantau,<small> <?php echo date('d-m-y'); ?></p>
+    <div>
+    </div>
     <br>
     <table>
         <tr>
             <th>NO.</th>
             <th>NAMA PNS</th>
             <th>NIP</th>
-            <th>PANGKAT|GOLONGAN</th>
             <th>JABATAN</th>
-            <th>Gaji LAMA</th>
-            <th>Gaji BARU</th>
-            <th>Gaji MULAI TANGGAL</th>
+            <th>GOLONGAN</th>
+            <th>PANGKAT LAMA</th>
+            <th>PANGKAT BARU</th>
+            <th>TANGGAL DIUSULKAN</th>
         </tr>
     @php
     $no = 1;
     @endphp
-    @foreach ($user as $item)
+    @foreach ($naikPangkat as $item)
         <tr>
             <td>{{ $no++ }}</td>
-            <td>{{ $item->nip }}</td>
-            <td>{{ $item->name }}</td>
-            <td>{{ $item->kepegawaian_pns->pangkat }}|{{ $item->kepegawaian_pns->golongan }}</td>
-            <td>{{ $item->kepegawaian_pns->jabatan }}</td>
+            <td>{{ $item->user_pegawai->nip }}</td>
+            <td>{{ $item->user_pegawai->name }}</td>
+            <td>{{ $item->user_pegawai->kepegawaian_pns->jabatan }}</td>
+            <td>{{ $item->user_pegawai->kepegawaian_pns->golongan }}</td>
+            <td>{{ $item->user_pegawai->kepegawaian_pns->pangkat }}</td>
+            <td>{{ $item->pangkat_pns->nama_pangkat }}</td>
+            <td>{{ $item->tgl_usulan }}</td>
         </tr>
     @endforeach
     </table>
@@ -71,7 +70,7 @@
             <br>
             <br>
             <br>
-            <p>Kepala Satuan <br>{{ $item->name }}<br>Pembina UTama Muda/IVc<br>NIP. 196309161992031011</p>
+            <p>Kepala Satuan <br>Drs. H. Mahyudin, M.Pd<br>Pembina UTama Muda/IVc<br>NIP. 196309161992031011</p>
         </div>
     </div>
     {{-- <div style="position: fixed;

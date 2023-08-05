@@ -44,6 +44,7 @@ Route::group(['prefix' => 'Admin', 'middleware' => ['auth']], function(){
 
     //route Data Kenaikan Pangkat :
     Route::get('/menu-kenaikan-pangkat', [NaikPangkatController::class, 'naikPangkatMenuAdmin'])->name('data.naikPangkat');
+    Route::get('/cetak-naik-pangkat', [NaikPangkatController::class, 'cetakListNP'])->name('cetak.naikPangkat');
     //Jabatan Reguler Eselon Struktural
     Route::get('/index-struktural', [NaikPangkatController::class, 'AdminStruktural'])->name('index.struktural');
     //Jabatan  Pelaksana Staf
